@@ -1,0 +1,59 @@
+easy_admin:
+    site_name: 'Backoffice Catalogue'
+    design:
+        brand_color: '#3498db'
+        menu:
+            - { label: 'Produits', entity: 'Produit', icon: 'fa fa-box' }
+            - { label: 'Catégories', entity: 'Categorie', icon: 'fa fa-tags' }
+            - { label: 'Logs', entity: 'Log', icon: 'fa fa-history' }
+
+    entities:
+        Produit:
+            class: App\Entity\Produit
+            label: Produits
+            list:
+                fields:
+                    - id
+                    - { property: title, sortable: true }
+                    - description
+                    - { property: price, type: 'currency', type_options: { currency: 'EUR' }, sortable: true }
+                    - { property: salePrice, type: 'currency', type_options: { currency: 'EUR' }, sortable: true }
+                    - brand
+                    - link
+                    - { property: imageLink, type: 'image', type_options: { base_path: '/uploads/images/' } }
+                    - categorie.nom
+            form:
+                fields:
+                    - title
+                    - description
+                    - price
+                    - salePrice
+                    - brand
+                    - link
+                    - imageLink
+                    - categorie
+
+        Categorie:
+            class: App\Entity\Categorie
+            label: Catégories
+            list:
+                fields:
+                    - id
+                    - nom
+            form:
+                fields:
+                    - nom
+
+        Log:
+            class: App\Entity\Log
+            label: Logs de traitement
+            list:
+                fields:
+                    - id
+                    - createdAt
+                    - { property: message, type: 'textarea', label: 'Message' } 
+            form:
+                fields:
+                    - { property: createdAt, type: 'text' }
+                    - status
+                    - message

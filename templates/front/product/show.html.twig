@@ -1,0 +1,82 @@
+{# templates/front/product/show.html.twig #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Produit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .product-details {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .product-details img {
+            display: block;
+            max-width: 100%;
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+        .product-details p {
+            margin: 10px 0;
+            color: #555;
+        }
+        .product-details a {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .product-details a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Détails du Produit</h1>
+
+    <div class="product-details">
+        <h2>{{ produit.title }}</h2>
+        <p>{{ produit.description }}</p>
+        <p><strong>Prix: </strong>{{ produit.price | number_format(2, ',', ' ') }} €</p>
+
+        {% if produit.salePrice %}
+            <p><strong>Offre spéciale: </strong>{{ produit.salePrice | number_format(2, ',', ' ') }} €</p>
+        {% endif %}
+
+        <p><strong>Catégorie: </strong>{{ produit.categorie.nom }}</p>
+        <p><strong>Condition du produit: </strong>{{ produit.productCondition }}</p>
+
+        {% if produit.link %}
+            <p><a href="{{ produit.link }}" target="_blank">Voir le produit original</a></p>
+        {% endif %}
+
+        {% if produit.imageLink %}
+            <img src="{{ produit.imageLink }}" alt="{{ produit.title }}">
+        {% endif %}
+
+        <a href="{{ path('product_list') }}">Retour à la liste</a>
+    </div>
+</body>
+</html>
